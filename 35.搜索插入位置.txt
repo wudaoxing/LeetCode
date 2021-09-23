@@ -1,0 +1,35 @@
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int left = 0, right = nums.length-1;
+        int mid = 0;
+        while(left <= right){
+            mid = left + (right - left)/2;
+            if(nums[mid] == target){
+                break;
+            }
+            else if(nums[mid] < target){
+                if(mid == nums.length-1){
+                    mid = mid + 1;
+                    break;
+                }
+                if(nums[mid+1]>target){
+                    mid = mid + 1;
+                    break;
+                }
+                left = mid + 1;
+            }
+            else{
+                 if(mid == 0){
+                
+                    break;
+                }
+                if(nums[mid-1]< target){
+                    break;
+                }
+                right = mid - 1;
+            }
+            
+        }
+        return mid;
+    }
+}
