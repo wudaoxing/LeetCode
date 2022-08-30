@@ -15,18 +15,31 @@ type TreeNode struct {
 }
 
 func insertIntoMaxTree(root *TreeNode, val int) *TreeNode {
-	if val > root.Val {
-		return &TreeNode{
-			val, root, nil,
+	//if val > root.Val {
+	//	return &TreeNode{
+	//		val, root, nil,
+	//	}
+	//}
+	//pre := root
+	//cur := root
+	//for cur != nil && cur.Val > val {
+	//	pre = cur
+	//	cur = cur.Right
+	//}
+	//pre.Right = &TreeNode{val, cur, nil}
+	//return root
+	var parent *TreeNode
+	for cur := root; cur != nil; cur = cur.Right {
+		if val > cur.Val {
+			if parent == nil {
+				return &TreeNode{val, root, nil}
+			}
+			parent.Right = &TreeNode{val, cur, nil}
+			return root
 		}
+		parent = cur
 	}
-	pre := root
-	cur := root
-	for cur != nil && cur.Val > val {
-		pre = cur
-		cur = cur.Right
-	}
-	pre.Right = &TreeNode{val, cur, nil}
+	parent.Right = &TreeNode{Val: val}
 	return root
 }
 
