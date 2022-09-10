@@ -15,5 +15,17 @@ func rotateRight(head *ListNode, k int) *ListNode {
 		iter = iter.Next
 		n++
 	}
-	add := n -
+	add := n - k%n
+	if add == n {
+		return head
+	}
+	newHead := head
+	newTail := head
+	for i := 1; i < add; i++ {
+		newTail = newTail.Next
+	}
+	newHead = newTail.Next
+	iter.Next = head
+	newTail.Next = nil
+	return newHead
 }
